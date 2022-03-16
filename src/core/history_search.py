@@ -9,6 +9,9 @@ from src.config import file_config
 
 
 def get_filenames_in_dir_no_recursive(dir_path):
+    if not os.path.exists(dir_path):
+        return []
+
     filenames = []
     for filename in os.listdir(dir_path):
         file_path = os.path.join(dir_path, filename)

@@ -20,7 +20,7 @@ CORS(app, supports_credentials=True)
 def api_upload_file():
     file = request.files.get('file')
     username = request.form.get('username')
-    student_id = request.form.get('studentId')
+    student_id = request.form.get('studentId').lower()
     filename = file.filename
     result = upload_file(username, student_id, filename, file.read())
     response = make_response(jsonify(result))
@@ -33,7 +33,7 @@ def api_upload_file():
 @app.route('/history_search', methods=['POST'])
 def api_history_search():
     username = request.form.get('username')
-    student_id = request.form.get('studentId')
+    student_id = request.form.get('studentId').lower()
     result = history_search(username, student_id)
     response = make_response(jsonify(result))
     response.headers['Access-Control-Allow-Headers'] = '*'

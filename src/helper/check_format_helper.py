@@ -27,7 +27,7 @@ with open(student_list_file_path, 'r', encoding='utf8') as reader:
         name_to_info_dict[name] = line
 
 
-def username_and_student_id_is_right(username, student_id):
+def username_and_student_id_is_right(username, student_id:str):
     """
     检查用户名和学号是否合法，合法返回True
     :param username:
@@ -38,6 +38,8 @@ def username_and_student_id_is_right(username, student_id):
         return False
     else:
         real_student_id = name_to_info_dict[username]['学号']
+        student_id = student_id.lower()
+        real_student_id = real_student_id.lower()
         if student_id == real_student_id:
             return True
         else:
