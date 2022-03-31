@@ -21,10 +21,10 @@ if not os.path.exists(student_list_file_path):
 
 with open(student_list_file_path, 'r', encoding='utf8') as reader:
     csv_reader = csv.DictReader(reader)
-    name_to_info_dict = {}
+    student_id_to_info_dict = {}
     for line in csv_reader:
-        name = line.pop('姓名')
-        name_to_info_dict[name] = line
+        student_id = line.pop('学号').lower()
+        student_id_to_info_dict[student_id] = line
 
 
 def username_and_student_id_is_right(username, student_id:str):
@@ -34,13 +34,11 @@ def username_and_student_id_is_right(username, student_id:str):
     :param student_id:
     :return:
     """
-    if username not in name_to_info_dict:
+    if student_id not in student_id_to_info_dict:
         return False
     else:
-        real_student_id = name_to_info_dict[username]['学号']
-        student_id = student_id.lower()
-        real_student_id = real_student_id.lower()
-        if student_id == real_student_id:
+        real_name = student_id_to_info_dict[student_id]['姓名']
+        if username == real_name:
             return True
         else:
             return False
